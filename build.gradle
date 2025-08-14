@@ -1,0 +1,59 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.12'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.mysite'
+version = '0.0.2-mysql-ver'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// H2 (사용 안 하면 제거 가능)
+	// runtimeOnly 'com.h2database:h2'
+
+	// ✅ MariaDB
+    // runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    // mysql
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+	// Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+	// Markdown
+	implementation 'org.commonmark:commonmark:0.21.0'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
